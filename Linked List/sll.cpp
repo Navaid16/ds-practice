@@ -84,6 +84,22 @@ void findMiddle(Node* head) {
     cout << "Middle element = " << slow->data <<endl;
 }
 
+// detecting cycle in LL
+bool detectcycle(Node* head) {
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast != NULL && fast->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(slow == fast){
+            return true;
+        }
+    }
+    return false;
+}
+
 int main(){
     int n;
     
@@ -101,6 +117,15 @@ int main(){
     display(head);
 
     findMiddle(head);
+
+    head->next->next->next->next->next = head->next;
+
+    if(detectcycle(head)) {
+        cout << "Cycle is present in the linked list";
+    }
+    else {
+        cout << "Cycle is not present in the linked list";
+    }
 
     return 0;
 
